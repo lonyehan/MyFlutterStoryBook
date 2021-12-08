@@ -14,7 +14,7 @@ class App extends StatelessWidget {
     return MaterialApp(
         initialRoute: '/',
         routes: <String, WidgetBuilder>{
-          '/day01': (BuildContext context) => const HomePage(),
+          '/day01': (BuildContext context) => const Event(),
           '/day02': (BuildContext context) => const DropdownMenu(),
         },
         home: HomePage());
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,10 @@ class HomePage extends StatelessWidget {
           late WidgetBuilder builder;
           switch (settings.name) {
             case '/':
-              builder = (BuildContext context) => const Event();
+              builder = (BuildContext context) => const Home();
               break;
             case '/day01':
-              (BuildContext context) => const Event();
+              builder = (BuildContext context) => const Event();
               break;
             case '/day02':
               builder = (BuildContext context) => const DropdownMenu();
@@ -45,5 +45,28 @@ class HomePage extends StatelessWidget {
           }
           return MaterialPageRoute<void>(builder: builder, settings: settings);
         });
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("HomePage"),
+      ),
+      body: Column(
+        children: [
+          TextButton(
+              child: Text("Day01"),
+              onPressed: () => {Navigator.of(context).pushNamed('/day01')}),
+          TextButton(
+              child: Text("Day02"),
+              onPressed: () => {Navigator.of(context).pushNamed('/day02')}),
+        ],
+      ),
+    );
   }
 }
