@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PricingCard extends StatelessWidget {
   const PricingCard({Key? key}) : super(key: key);
@@ -30,64 +31,39 @@ class PricingCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 276,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Free",
-                              style: TextStyle(
-                                  fontFamily: "Merriweather",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 26),
-                            ),
-                            SizedBox(
-                              height: 21,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "\$0",
-                                  style: TextStyle(
-                                      fontFamily: "IBM Plex Sans",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 62),
-                                ),
-                              ],
-                            ),
-                            Text("Free for your whole team",
-                                style: TextStyle(
-                                    fontFamily: "IBM Plex Sans",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16)),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                                "For individuals or teams looking to organize anything.",
-                                style: TextStyle(
-                                    fontFamily: "IBM Plex Sans",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20)),
-                            SizedBox(
-                              height: 50,
-                            ),
-                            TextButton(
-                              onPressed: () => {},
-                              child: Text("Get started",
-                                  style: TextStyle(color: Colors.black)),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Color(0xFFEDBBFF)),
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.all(20)),
-                              ),
-                            ),
-                          ],
-                        ),
+                      PricingCardItem(
+                          info: PricingCardInfo(
+                              level: "Free",
+                              price: 0,
+                              levelDes: "Free for your whole team",
+                              levelDetail:
+                                  "For individuals or teams looking to organize anything.",
+                              buttonInfo: "Get started",
+                              buttonColor: const Color(0xFFEDBBFF))),
+                      SizedBox(
+                        width: 45,
                       ),
+                      PricingCardItem(
+                          info: PricingCardInfo(
+                              level: "Standard",
+                              price: 6,
+                              levelDes: "Per user per month",
+                              levelDetail:
+                                  "For teams that need to manage more work.",
+                              buttonInfo: "Upgrade Now",
+                              buttonColor: const Color(0xFFAEF1F5))),
+                      SizedBox(
+                        width: 45,
+                      ),
+                      PricingCardItem(
+                          info: PricingCardInfo(
+                              level: "Premium",
+                              price: 12,
+                              levelDes: "Per user per month",
+                              levelDetail:
+                                  "Best for teams that need to track multiple projects.",
+                              buttonInfo: "Try for free",
+                              buttonColor: const Color(0xFFFFDDB6))),
                     ],
                   ),
                 ),
@@ -95,5 +71,89 @@ class PricingCard extends StatelessWidget {
             ),
           ),
         ));
+  }
+}
+
+class PricingCardInfo {
+  String level;
+  int price;
+  String levelDes;
+  String levelDetail;
+  String buttonInfo;
+  Color buttonColor;
+
+  PricingCardInfo(
+      {required this.level,
+      required this.price,
+      required this.levelDes,
+      required this.levelDetail,
+      required this.buttonInfo,
+      required this.buttonColor});
+}
+
+class PricingCardItem extends StatelessWidget {
+  final PricingCardInfo info;
+
+  const PricingCardItem({required this.info});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 276,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${info.level}",
+            style: GoogleFonts.merriweather(
+                fontWeight: FontWeight.bold, fontSize: 26),
+          ),
+          SizedBox(
+            height: 21,
+          ),
+          RichText(
+              text: TextSpan(children: [
+            TextSpan(
+              text: "\$",
+              style: GoogleFonts.ibmPlexSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 36,
+              ),
+            ),
+            TextSpan(
+                text: "${info.price}",
+                style: GoogleFonts.ibmPlexSans(
+                    fontWeight: FontWeight.bold, fontSize: 62)),
+          ])),
+          Text("${info.levelDes}",
+              style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w600, fontSize: 16)),
+          SizedBox(
+            height: 40,
+          ),
+          Text("${info.levelDetail}",
+              style: GoogleFonts.ibmPlexSans(
+                  fontWeight: FontWeight.w600, fontSize: 20)),
+          SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+            onPressed: () => {},
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+              child: Text(
+                "${info.buttonInfo}",
+                style: GoogleFonts.ibmPlexSans(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Colors.black),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(primary: info.buttonColor),
+          ),
+        ],
+      ),
+    );
   }
 }
