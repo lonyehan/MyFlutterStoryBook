@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_flutter_app/pages/DropdownMenu.dart';
+import 'package:my_first_flutter_app/pages/PricingCard.dart';
 
 import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
+import 'pages/PricingCard.dart';
 
 void main() {
   runApp(App());
@@ -16,6 +18,7 @@ class App extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/day01': (BuildContext context) => const Event(),
           '/day02': (BuildContext context) => const DropdownMenu(),
+          '/day03': (BuildContext context) => const PricingCard(),
         },
         home: HomePage());
   }
@@ -40,6 +43,9 @@ class HomePage extends StatelessWidget {
             case '/day02':
               builder = (BuildContext context) => const DropdownMenu();
               break;
+            case '/day03':
+              builder = (BuildContext context) => const PricingCard();
+              break;
             default:
               throw Exception('Invalid route: ${settings.name}');
           }
@@ -60,11 +66,14 @@ class Home extends StatelessWidget {
       body: Column(
         children: [
           TextButton(
-              child: Text("Day01"),
+              child: const Text("Day01"),
               onPressed: () => {Navigator.of(context).pushNamed('/day01')}),
           TextButton(
-              child: Text("Day02"),
+              child: const Text("Day02"),
               onPressed: () => {Navigator.of(context).pushNamed('/day02')}),
+          TextButton(
+              child: const Text("Day03"),
+              onPressed: () => {Navigator.of(context).pushNamed('/day03')}),
         ],
       ),
     );
