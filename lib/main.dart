@@ -1,11 +1,12 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_first_flutter_app/pages/DropdownMenu.dart';
-import 'package:my_first_flutter_app/pages/PricingCard.dart';
 
 import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
+import 'pages/FeedbackDialog.dart';
 
 void main() {
   runApp(App());
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
           '/day01': (BuildContext context) => const Event(),
           '/day02': (BuildContext context) => const DropdownMenu(),
           '/day03': (BuildContext context) => const PricingCard(),
+          '/day04': (BuildContext context) => FeedbackDialog(),
           '/daily_prototype': (BuildContext context) => const DailyPrototype(),
         },
         home: HomePage());
@@ -50,6 +52,9 @@ class HomePage extends StatelessWidget {
               break;
             case '/day03':
               builder = (BuildContext context) => const PricingCard();
+              break;
+            case '/day04':
+              builder = (BuildContext context) => FeedbackDialog();
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');
@@ -141,6 +146,7 @@ class DailyPrototype extends StatelessWidget {
               DaliyButton(name: "Day01", route: "/day01"),
               DaliyButton(name: "Day02", route: "/day02"),
               DaliyButton(name: "Day03", route: "/day03"),
+              DaliyButton(name: "Day04", route: "/day04"),
             ],
           ),
         ));
