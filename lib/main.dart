@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_first_flutter_app/pages/SignUp.dart';
 
 import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
           '/day02': (BuildContext context) => const DropdownMenu(),
           '/day03': (BuildContext context) => const PricingCard(),
           '/day04': (BuildContext context) => FeedbackDialog(),
+          '/day05': (BuildContext context) => SignUp(),
           '/daily_prototype': (BuildContext context) => const DailyPrototype(),
         },
         home: HomePage());
@@ -55,6 +57,9 @@ class HomePage extends StatelessWidget {
               break;
             case '/day04':
               builder = (BuildContext context) => FeedbackDialog();
+              break;
+            case '/day05':
+              builder = (BuildContext context) => SignUp();
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');
@@ -147,6 +152,7 @@ class DailyPrototype extends StatelessWidget {
               DaliyButton(name: "Day02", route: "/day02"),
               DaliyButton(name: "Day03", route: "/day03"),
               DaliyButton(name: "Day04", route: "/day04"),
+              DaliyButton(name: "Day05", route: "/day05"),
             ],
           ),
         ));
