@@ -7,6 +7,7 @@ import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
 import 'pages/FeedbackDialog.dart';
+import 'dart:html' as html;
 
 void main() {
   runApp(App());
@@ -170,7 +171,10 @@ class DaliyButton extends StatelessWidget {
             style: GoogleFonts.ibmPlexSans(
                 fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          onPressed: () => {Navigator.of(context).pushNamed(route)}),
+          onPressed: () => {
+                html.window.history.pushState(null, name, route),
+                Navigator.of(context).pushNamed(route)
+              }),
     );
   }
 }
