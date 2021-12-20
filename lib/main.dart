@@ -1,9 +1,13 @@
 // ignore_for_file: equal_keys_in_map
 
+// package
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_first_flutter_app/pages/SignUp.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:redux_saga/redux_saga.dart';
 
+// components
 import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
@@ -14,69 +18,55 @@ void main() {
 }
 
 class App extends StatelessWidget {
+  final _router = GoRouter(routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+        path: '/daily_prototype',
+        builder: (context, state) => HomePage(widget: DailyPrototype()),
+        routes: [
+          GoRoute(
+            path: 'day01',
+            builder: (context, state) => Event(),
+          ),
+          GoRoute(
+            path: 'day02',
+            builder: (context, state) => DropdownMenu(),
+          ),
+          GoRoute(
+            path: 'day03',
+            builder: (context, state) => PricingCard(),
+          ),
+          GoRoute(
+            path: 'day04',
+            builder: (context, state) => FeedbackDialog(),
+          ),
+          GoRoute(
+            path: 'day05',
+            builder: (context, state) => SignUp(),
+          ),
+        ])
+  ]);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        initialRoute: '/',
-        routes: <String, WidgetBuilder>{
-          '/day01': (BuildContext context) => const Event(),
-          '/day02': (BuildContext context) => const DropdownMenu(),
-          '/day03': (BuildContext context) => const PricingCard(),
-          '/day04': (BuildContext context) => FeedbackDialog(),
-          '/day05': (BuildContext context) => SignUp(),
-          '/daily_prototype': (BuildContext context) => const DailyPrototype(),
-        },
-        home: HomePage());
+    return MaterialApp.router(
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate);
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  Widget? widget;
+  HomePage({this.widget});
 
   @override
-  Widget build(BuildContext context) {
-    return Navigator(
-        initialRoute: '/',
-        onGenerateRoute: (RouteSettings settings) {
-          late WidgetBuilder builder;
-          switch (settings.name) {
-            case '/':
-              builder = (BuildContext context) => const Home();
-              break;
-            case '/daily_prototype':
-              builder = (BuildContext context) => const DailyPrototype();
-              break;
-            case '/day01':
-              builder = (BuildContext context) => const Event();
-              break;
-            case '/day02':
-              builder = (BuildContext context) => const DropdownMenu();
-              break;
-            case '/day03':
-              builder = (BuildContext context) => const PricingCard();
-              break;
-            case '/day04':
-              builder = (BuildContext context) => FeedbackDialog();
-              break;
-            case '/day05':
-              builder = (BuildContext context) => SignUp();
-              break;
-            default:
-              throw Exception('Invalid route: ${settings.name}');
-          }
-          return MaterialPageRoute<void>(builder: builder, settings: settings);
-        });
-  }
+  State<HomePage> createState() => _HomePageState();
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,67 +85,49 @@ class _HomeState extends State<Home> {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.home),
+              title: Text(
+                "Home",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              onTap: () => {context.go('/')},
+            ),
+            ListTile(
               leading: Icon(Icons.apps),
               title: Text(
                 "Daliy Prototype",
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
-              onTap: () => {Navigator.pushNamed(context, '/daily_prototype')},
+              onTap: () => {context.go('/daily_prototype')},
             )
           ],
         ),
       ),
+      body: widget.widget,
     );
   }
 }
 
 class DailyPrototype extends StatelessWidget {
-  const DailyPrototype({Key? key}) : super(key: key);
+  DailyPrototype({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("DaliyPrototype"),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const UserAccountsDrawerHeader(
-                accountName: Text("Lonyehan"),
-                accountEmail: Text("lonyehan@gmail.com"),
-                currentAccountPicture: CircleAvatar(
-                  child: Text("L"),
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.apps),
-                title: const Text(
-                  "Daliy Prototype",
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                onTap: () =>
-                    {Navigator.of(context).pushNamed('/daily_prototype')},
-              )
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: GridView.count(
-            crossAxisCount: 10,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            children: [
-              DaliyButton(name: "Day01", route: "/day01"),
-              DaliyButton(name: "Day02", route: "/day02"),
-              DaliyButton(name: "Day03", route: "/day03"),
-              DaliyButton(name: "Day04", route: "/day04"),
-              DaliyButton(name: "Day05", route: "/day05"),
-            ],
-          ),
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GridView.count(
+        crossAxisCount: 10,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: [
+          DaliyButton(name: "Day01", route: "/daily_prototype/day01"),
+          DaliyButton(name: "Day02", route: "/daily_prototype/day02"),
+          DaliyButton(name: "Day03", route: "/daily_prototype/day03"),
+          DaliyButton(name: "Day04", route: "/daily_prototype/day04"),
+          DaliyButton(name: "Day05", route: "/daily_prototype/day05"),
+        ],
+      ),
+    );
   }
 }
 
@@ -176,7 +148,7 @@ class DaliyButton extends StatelessWidget {
             style: GoogleFonts.ibmPlexSans(
                 fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          onPressed: () => {Navigator.of(context).pushNamed(route)}),
+          onPressed: () => {context.go(route)}),
     );
   }
 }

@@ -4,30 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PricingCard extends StatelessWidget {
-  const PricingCard({Key? key}) : super(key: key);
+  PricingCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("PricingCard"),
+          title: Text("PricingCard"),
         ),
         body: Center(
           child: Container(
             width: 1098,
             height: 544,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(30)),
               color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(23),
+              padding: EdgeInsets.all(23),
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Color(0xFFF4F6FA)),
                 child: Padding(
-                  padding: const EdgeInsets.all(67),
+                  padding: EdgeInsets.all(67),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -39,7 +39,7 @@ class PricingCard extends StatelessWidget {
                               levelDetail:
                                   "For individuals or teams looking to organize anything.",
                               buttonInfo: "Get started",
-                              buttonColor: const Color(0xFFEDBBFF))),
+                              buttonColor: Color(0xFFEDBBFF))),
                       SizedBox(
                         width: 45,
                       ),
@@ -51,7 +51,7 @@ class PricingCard extends StatelessWidget {
                               levelDetail:
                                   "For teams that need to manage more work.",
                               buttonInfo: "Upgrade Now",
-                              buttonColor: const Color(0xFFAEF1F5))),
+                              buttonColor: Color(0xFFAEF1F5))),
                       SizedBox(
                         width: 45,
                       ),
@@ -63,7 +63,7 @@ class PricingCard extends StatelessWidget {
                               levelDetail:
                                   "Best for teams that need to track multiple projects.",
                               buttonInfo: "Try for free",
-                              buttonColor: const Color(0xFFFFDDB6))),
+                              buttonColor: Color(0xFFFFDDB6))),
                     ],
                   ),
                 ),

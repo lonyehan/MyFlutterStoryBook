@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("PricingCard"),
+          title: Text("PricingCard"),
         ),
         body: Center(
           child: Container(
@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                             hintText: "Enter your work email address",
                             enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                     color: Color(0xFF000000), width: 2),
                                 borderRadius: BorderRadius.circular(4)),
                             border: OutlineInputBorder()),
@@ -107,8 +107,8 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () => {},
                       child: Center(
                           child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 25, horizontal: 157),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 25, horizontal: 157),
                         child: Text("DOWNLOAD NOW",
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500, fontSize: 18)),

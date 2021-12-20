@@ -91,7 +91,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                         decoration: InputDecoration(
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                     color: Color(0xFFE5EDFF), width: 2),
                                 borderRadius: BorderRadius.circular(5)),
                             border: OutlineInputBorder()),
@@ -252,7 +252,7 @@ class _FaceOptionState extends State<FaceOption> {
             border: Border.all(color: borderColor, width: 2),
             borderRadius: BorderRadius.circular(5)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 22),
+          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 22),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

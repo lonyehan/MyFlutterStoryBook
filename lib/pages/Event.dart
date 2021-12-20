@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Event extends StatelessWidget {
-  const Event({Key? key}) : super(key: key);
+  Event({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Main')),
+      appBar: AppBar(title: Text('Main')),
       backgroundColor: Color(0xFFECEFF8),
       body: Center(
           child: Column(
