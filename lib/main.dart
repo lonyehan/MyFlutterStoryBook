@@ -12,6 +12,7 @@ import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
 import 'pages/FeedbackDialog.dart';
+import 'dart:html' as html;
 
 void main() {
   runApp(App());
