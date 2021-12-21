@@ -2,23 +2,33 @@
 
 // package
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_first_flutter_app/pages/SignUp.dart';
 import 'package:go_router/go_router.dart';
-// import 'package:redux_saga/redux_saga.dart';
+import 'package:my_first_flutter_app/sagas/index.dart';
+import 'package:my_first_flutter_app/store/store.dart';
+import 'package:redux/redux.dart';
 
 // components
 import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
 import 'pages/FeedbackDialog.dart';
-import 'dart:html' as html;
 
 void main() {
-  runApp(App());
+  final ConfigureStore store = ConfigureStore(null);
+  store.run(rootSaga);
+
+  runApp(StoreProvider(
+    store: store.store as Store<dynamic>,
+    child: App(),
+  ));
 }
 
 class App extends StatelessWidget {
+  App({Key? key}) : super(key: key);
+
   final _router = GoRouter(routes: [
     GoRoute(
       path: '/',
@@ -48,7 +58,11 @@ class App extends StatelessWidget {
             path: 'day05',
             builder: (context, state) => SignUp(),
           ),
-        ])
+        ]),
+    GoRoute(
+        path: '/tdx',
+        builder: (context, state) => HomePage(widget: DailyPrototype()),
+        routes: []),
   ]);
 
   @override
@@ -60,7 +74,7 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  Widget? widget;
+  late Widget? widget;
   HomePage({this.widget});
 
   @override
@@ -78,7 +92,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text("Lonyehan"),
               accountEmail: Text("lonyehan@gmail.com"),
               currentAccountPicture: CircleAvatar(
@@ -87,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.home),
-              title: Text(
+              title: const Text(
                 "Home",
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
@@ -95,12 +109,20 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.apps),
-              title: Text(
+              title: const Text(
                 "Daliy Prototype",
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               onTap: () => {context.go('/daily_prototype')},
-            )
+            ),
+            ListTile(
+              leading: Icon(Icons.where_to_vote),
+              title: const Text(
+                "TDX",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              onTap: () => {context.go('/tdx')},
+            ),
           ],
         ),
       ),
