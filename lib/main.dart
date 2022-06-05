@@ -1,6 +1,8 @@
 // ignore_for_file: equal_keys_in_map
 
 // package
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +17,7 @@ import 'pages/Event.dart';
 import 'pages/DropdownMenu.dart';
 import 'pages/PricingCard.dart';
 import 'pages/FeedbackDialog.dart';
+import 'pages/LayoutPlayground.dart';
 
 void main() {
   final ConfigureStore store = ConfigureStore(null);
@@ -58,6 +61,10 @@ class App extends StatelessWidget {
             path: 'day05',
             builder: (context, state) => SignUp(),
           ),
+          GoRoute(
+            path: 'day06',
+            builder: (context, state) => const LayoutPlayground(),
+          )
         ]),
     GoRoute(
         path: '/tdx',
@@ -148,6 +155,7 @@ class DailyPrototype extends StatelessWidget {
           DaliyButton(name: "Day03", route: "/daily_prototype/day03"),
           DaliyButton(name: "Day04", route: "/daily_prototype/day04"),
           DaliyButton(name: "Day05", route: "/daily_prototype/day05"),
+          DaliyButton(name: "Day06", route: "/daily_prototype/day06"),
         ],
       ),
     );
